@@ -7,12 +7,12 @@ router.post("/register", authController.signUp); // Création d'un utilisateur
 router.post('/login', authController.signIn);
 router.get("/logout", authController.logout);
 
-// USER DB
-router.get("/", userController.getAllUsers); // recuperer tous les utilisateurs
-router.get("/:id", userController.userInfo); // recuperer un utilisateur
+// USER DataBase
+router.get("/", userController.getAllUsers); // récupérer tous les utilisateurs
+router.get("/:id", userController.userInfo); // récupérer un utilisateur
 router.put("/:id", userController.updateUser);// modifier un utilisateur
 router.delete("/:id", userController.deleteUser); // supprimer un utilisateur
-router.patch("/follow/:id", userController.followUser);
-router.patch("/unfollow/:id", userController.unfollowUser);
+router.patch("/follow/:id", userController.followUser);// suivre un utilisateur
+router.patch("/unfollow/:id", userController.unfollowUser);// ne plus suivre un utilisateur
 
 module.exports = router;
