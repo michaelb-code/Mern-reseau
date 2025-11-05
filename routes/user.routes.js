@@ -4,6 +4,8 @@ const userController = require("../controllers/user.controller");
 
 // AUTH
 router.post("/register", authController.signUp); // Création d'un utilisateur
+router.post('/login', authController.signIn);
+router.get("/logout", authController.logout);
 
 // USER DB
 router.get("/", userController.getAllUsers); // recuperer tous les utilisateurs

@@ -1,5 +1,8 @@
 const UserModel = require("../models/user.model")
 
+
+
+// CREATION D'UN UTILISATEUR
 module.exports.signUp = async (req, res) => {
     const {pseudo, email, password} = req.body
 
@@ -11,3 +14,5 @@ module.exports.signUp = async (req, res) => {
         res.status(200).send({ err })
     }
 }
+
+// CONNEXION D'UN UTILISATEUR
