@@ -7,8 +7,8 @@ const userSchema = new mongoose.Schema({
     pseudo:{
         type: String,
         required: true,
-        minLenght: 5,
-        maxLenght: 50,
+        minlength: 5,
+        maxlength: 50,
         unique: true,
         trim: true
     },
@@ -27,7 +27,7 @@ const userSchema = new mongoose.Schema({
         type:String,
         required: true,
         max: 1024,
-        minLenght: 6
+        minlength: 6
     },
 
     picture:{
@@ -37,7 +37,7 @@ const userSchema = new mongoose.Schema({
 
     bio: {
         type: String,
-        maxLenght: 1024
+        max: 1024
     },
 
     followers:{
