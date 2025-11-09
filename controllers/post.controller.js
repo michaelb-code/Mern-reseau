@@ -34,11 +34,37 @@ module.exports.createPost = async (req, res) => {
 };
 
 //UPDATE POST
-module.exports.updatePost = (req, res) => {
+module.exports.updatePost = async (req, res) => {
+    if (!ObjectId.isValid(req.params.id))
+        return res.status(400).send("ID inconnu : " + req.params.id);
 
+    const updatedRecord = {
+        message: req.body.message,
+    }
+
+    try {
+        const post = await PostModel.updateOne(
+            { _id: req.params.id },
+            { $set: updatedRecord }
+        )
+
+        return res.status(200).json(post);
+    } catch (err) {
+        return res.status(400).send(err);
+    }
 }
 
 //DELETE POST
-module.exports.deletePost = (req, res) => {
+module.exports.deletePost = async (req, res) => {
+    if (!ObjectId.isValid(req.params.id))
+        return res.status(400).send("ID inconnu : " + req.params.id);
 
+    try {
+        const deletedPost = await PostModel.deleteOne(
+            { _id: req.params.id }
+        )
+        return res.status(200).json(deletedPost);
+    } catch (err) {
+        return res.status(400).send(err);
+    }
 }
