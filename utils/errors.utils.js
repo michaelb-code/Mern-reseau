@@ -1,5 +1,6 @@
 
 
+//sign up errors
 module.exports.signUpErrors = (err) => {
     let errors = {pseudo: "", email: "", password: ""};
 
@@ -21,6 +22,7 @@ module.exports.signUpErrors = (err) => {
     return errors;
 };
 
+//sign in errors
 module.exports.signInErrors = (err) => {
     let errors = {email: "", password: ""};
 
@@ -29,6 +31,18 @@ module.exports.signInErrors = (err) => {
 
     if(err.message.includes("Mot de passe incorrect"))
         errors.password = "Mot de passe incorrect.";
+
+    return errors;
+}
+
+
+//upload errors
+module.exports.uploadErrors = (err) => {
+    let errors = {format: '', maxSize: ""};
+    if(err.message.includes("Format d'image non valide"))
+        errors.format = "format Incompatible";
+    if(err.message.includes("Image trop volumineuse"))
+        errors.maxSize = "Le fichier dépasse la taille maximale";
 
     return errors;
 }
