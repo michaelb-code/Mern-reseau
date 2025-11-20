@@ -35,8 +35,7 @@ module.exports.uploadProfil = async (req, res) => {
 
         console.log("Fichier sauvegardé à:", fullPath);
 
-
-        const userPicture = null 
+        let userPicture = null 
         if (req.body.userId) {
             userPicture = await UserModel.findByIdAndUpdate(
             req.body.userId,
@@ -47,8 +46,7 @@ module.exports.uploadProfil = async (req, res) => {
             },
             
             { new: true }
-        )
-        }
+        )}
 
         return res.status(201).json({
             message: "Image téléchargée avec succès",
@@ -59,14 +57,11 @@ module.exports.uploadProfil = async (req, res) => {
             path: `./uploads/profil/${filename}`
         });
 
-
-
     } catch (err) {
         console.error("Erreur upload:", err);
         const errors = uploadErrors(err);
         return res.status(400).json({ errors });
 
     }
-
 
 };

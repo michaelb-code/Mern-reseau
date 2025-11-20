@@ -2,6 +2,11 @@ const PostModel = require("../models/post.model");
 const UserModel = require("../models/user.model");
 const ObjectId = require("mongoose").Types.ObjectId;
 
+const fs = require("fs");
+const { promisify } = require('util');
+const pipeline = promisify(require('stream').pipeline)
+const { uploadErrors } = require("../utils/errors.utils");
+
 //GET ALL POST
 module.exports.readPost = async (req, res) => {
     try {
@@ -14,9 +19,63 @@ module.exports.readPost = async (req, res) => {
 
 //CREATE POST
 module.exports.createPost = async (req, res) => {
+
+    let fileName;
+    if (req.file !== null) {
+        try {
+            if (!req.file) return res.status(400).send("Aucune image reçue");
+
+        console.log("Fichier reçu:", req.file);
+        console.log("Type MIME:", req.file.mimetype);
+        console.log("Taille:", req.file.size);
+
+        if (req.file.mimetype !== "image/jpg" && req.file.mimetype !== "image/png" && req.file.mimetype !== "image/jpeg")
+            throw Error("Format d'image non valide");
+
+        if (req.file.size > 150000000) {
+            throw Error("Image trop volumineuse");
+        }
+
+        // Créer le nom de fichier
+        const filename = (req.body.name || 'default') + '.jpg';
+        const uploadPath = `${__dirname}/../client/public/uploads/posts/`;
+        const fullPath = uploadPath + filename;
+
+        // Créer le dossier s'il n'existe pas
+        if (!fs.existsSync(uploadPath)) {
+            fs.mkdirSync(uploadPath, { recursive: true });
+        }
+
+        // Sauvegarder le fichier depuis le buffer
+        fs.writeFileSync(fullPath, req.file.buffer);
+
+        console.log("Fichier sauvegardé à:", fullPath);
+
+        fileName = req.body.posterId + Date.now()+ ".jpg";
+
+        let userPicture = null 
+        if (req.body.userId) {
+            userPicture = await UserModel.findByIdAndUpdate(
+            req.body.userId,
+            {
+                $set: {
+                    picture: "./uploads/posts/" + fileName
+                }
+            },
+            
+            { new: true }
+        )}
+        
+    } catch (err) {
+        return res.status(400).send(err);
+    }
+}
+
+
     const newPost = new PostModel({
         posterId: req.body.posterId,
         message: req.body.message,
+        picture: req.file !== null ? "./uploads/posts/" + fileName : null,
         video: req.body.vide,
         likers: [],
         comments: [],

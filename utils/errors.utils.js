@@ -38,7 +38,7 @@ module.exports.signInErrors = (err) => {
 
 //upload errors
 module.exports.uploadErrors = (err) => {
-    let errors = {format: '', maxSize: ""};
+    let errors = {format: "", maxSize: ""};
     if(err.message.includes("Format d'image non valide"))
         errors.format = "format Incompatible";
     if(err.message.includes("Image trop volumineuse"))

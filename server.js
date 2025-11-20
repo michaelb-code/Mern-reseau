@@ -6,7 +6,19 @@ const postRoutes = require("./routes/post.routes");
 require("dotenv").config({ path: "./config/.env" });
 require("./config/db");
 const { checkUser, requireAuth } = require("./middleware/auth.middleware");
+
+const cors = require("cors");//protege et sécurise les requetes HTTP
+
 const app = express();
+
+//CORS
+const corsOption = {
+    origin: process.env.CLIENT_URL,
+    credentials: true,
+    methode: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+}
+app.use(cors(corsOption));
 
 app.use(bodyParser.json());//permet de lire le body
 app.use(bodyParser.urlencoded({ extended: true }));//permet de lire les url
