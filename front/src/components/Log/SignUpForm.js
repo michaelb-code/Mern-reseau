@@ -3,8 +3,7 @@ import React from 'react'
 const SignUpForm = () => {
   return (
     <div>
-
-    Connecter
+      Inscription
     </div>
   )
 }
