@@ -1,3 +1,5 @@
+@use '../settings' as *;
+
 .get-friends-container {
   width: 356px;
   background: linear-gradient(145deg, $color-2 30%, #ffe1d9 100%);

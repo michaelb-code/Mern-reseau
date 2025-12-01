@@ -1,3 +1,4 @@
+@use '../settings' as *;
 .card-container {
   display: grid;
   grid-template-columns: 66px 1fr;
