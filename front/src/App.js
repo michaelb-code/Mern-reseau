@@ -18,8 +18,12 @@ const App = () => {
                 setUid(response.data);
 
             } catch (err) {
-                console.log(err);
-                
+                if(err.response && err.response.status ===401){
+                    setUid(null);
+                    console.log("Vous n'etes pas connecté");
+                } else {
+                    console.log(err);
+                }
             }
         }
         fetchToken();
