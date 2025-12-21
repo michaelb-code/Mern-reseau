@@ -5,12 +5,15 @@ import {BrowserRouter as Router, Route, Routes, Navigate} from 'react-router-dom
 import Home from '../../pages/Home';
 import Profil from '../../pages/Profil';
 import Trending from '../../pages/Trending';
+import NavBar from '../NavBar'
+import { NavLink } from 'react-router-dom';
 
 
 const AppRouter = () => {
     return (
         
             <Router>
+                <NavBar/>
                 <Routes>
                     <Route path="/" element={<Home/>}/>
                     <Route path="/profil" element={<Profil/>}/>
