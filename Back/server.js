@@ -10,6 +10,7 @@ const { checkUser, requireAuth } = require("./middleware/auth.middleware");
 const cors = require("cors");//protege et sécurise les requetes HTTP
 
 const app = express();
+const path = require("path");
 
 //CORS
 const corsOption = {
@@ -34,6 +35,8 @@ app.get("/jwtid", requireAuth, (req, res) => {
     }
 });
 
+
+app.use("/uploads", express.static(path.join(__dirname, "client/public/uploads")));
 
 // ROUTES
 app.use('/api/user', userRoutes);
