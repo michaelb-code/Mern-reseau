@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import UploadImg from './UploadImg'
 import LeftNav from '../LeftNav';
 import { updateBio } from '../../actions/user.action';
+import { dateParser } from '../utils';
 
 const UpdateProfil = () => {
     const [bio, setBio] = useState('');
@@ -60,12 +61,9 @@ const UpdateProfil = () => {
                                 </textarea>
                                 <button onClick={handleUpdate}>Valider Ma Modification</button>
                             </>
-
                         )}
-
-
                     </div>
-
+                    <h4>Membre Depuis Le {dateParser(userData.createdAt)}</h4>
                 </div>
             </div>
 
