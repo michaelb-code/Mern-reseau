@@ -6,6 +6,7 @@ import UploadImg from './UploadImg'
 import LeftNav from '../LeftNav';
 import { updateBio } from '../../actions/user.action';
 import { dateParser } from '../utils';
+import FollowHandler from './FollowHandler';
 
 const UpdateProfil = () => {
     const [bio, setBio] = useState('');
@@ -84,7 +85,8 @@ const UpdateProfil = () => {
                                             <li key={user._id}>
                                                 <img src={user.picture} alt='user-Photo' />
                                                 <h4>{user.pseudo}</h4>
-                                                <h1>FOLLOW HANDLER</h1>
+                                                <div className='follow-handler'>
+                                                    <FollowHandler idToFollow={user._id} /></div>
                                             </li>
                                         )
                                     }
@@ -99,7 +101,7 @@ const UpdateProfil = () => {
                     <div className='modal'>
                         <h3>Abonnements</h3>
                         <span className='cross' onClick={() => setFollowersPopup(false)}>&#10005;</span>
-                         <ul>
+                        <ul>
                             {usersData.map((user) => {
                                 for (let i = 0; i < userData.followers.length; i++) {
                                     if (user._id === userData.followers[i]) {
@@ -107,7 +109,8 @@ const UpdateProfil = () => {
                                             <li key={user._id}>
                                                 <img src={user.picture} alt='user-Photo' />
                                                 <h4>{user.pseudo}</h4>
-                                                <h1>FOLLOW HANDLER</h1>
+                                                <div className='follow-handler'>
+                                                    <FollowHandler idToFollow={user._id} /></div>
                                             </li>
                                         )
                                     }
