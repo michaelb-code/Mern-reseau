@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
+
 import { dateParser, isEmpty } from '../utils';
 import FollowHandler from '../Profil/FollowHandler';
+import LikeButton from './LikeButton';
 
 const Card = ({ post }) => {
     //on passe "post" en props pour recuperer toutes les données lié aux posts
@@ -58,13 +60,14 @@ const Card = ({ post }) => {
                                     )}
                         <div className='card-footer'>
                             <div className='comment-icon'>
-                                <img src='./img/icons/message1.svg'/>
+                                <img src='./img/icons/message1.svg' alt='message'/>
                                 <span>{post.comments.length}</span>
                             </div>
-                            <h6>like buttom</h6>
-                            <img src='./img/icons/share.svg'/>
+                            <LikeButton post={post}/> 
+                            {/* on se met en props(nos likes) pour pouvoir recuperer toutes nos donnees lié aux posts  */}
+                            <img src='./img/icons/share.svg' alt='partage'/>
                         </div>
-                        
+
                     </div>
                 </>
             )}
