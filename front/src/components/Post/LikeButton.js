@@ -26,7 +26,7 @@ const LikeButton = ({ post }) => { //le post se recupere du props sur le fichier
         if (post.likers.includes(uid)) setLiked(true)
             else setLiked(false)
         //post.likers regroupe tous les id des gens qui ont liké ce post
-    }, [uid, post.likers]) //on relance le useEffect quand tu as le uid pour pas quil reste sur false , on le relance pour le tableau des post.likers (quand on va chercher la data)
+    }, [uid, post.likers, liked]) //on relance le useEffect quand tu as le uid pour pas quil reste sur false , on le relance pour le tableau des post.likers (quand on va chercher la data), et si les liked sont deja incrementé
 
 
 

@@ -6,14 +6,16 @@ export const GET_POSTS = "GET_POSTS";
 export const LIKE_POST = "LIKE_POST";
 export const UNLIKE_POST = "UNLIKE_POST";
 
-export const getPosts = () => {
+export const getPosts = (num) => {
     return (dispatch) => {
         return axios({
             method: "get",
             url: `${process.env.REACT_APP_API_URL}api/post/`
         })
             .then((res) => {
-                dispatch({ type: GET_POSTS, payload: res.data })
+                const array = res.data.slice(0, num) //permet dafficher les posts qui vont de 0 au nombre defini en loccurence 5
+                //on veut charger 5 posts par 5 posts pour ne pas charger tout dun coup 
+                dispatch({ type: GET_POSTS, payload: array })
             })
             .catch((err) => console.log(err))
     }
