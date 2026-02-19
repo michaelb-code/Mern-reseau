@@ -5,6 +5,7 @@ import { dateParser, isEmpty } from '../utils';
 import FollowHandler from '../Profil/FollowHandler';
 import LikeButton from './LikeButton';
 import { updatePost } from '../../actions/post.action';
+import DeleteCard from './DeleteCard';
 
 const Card = ({ post }) => {
     //on passe "post" en props pour recuperer toutes les données lié aux posts
@@ -91,7 +92,7 @@ const Card = ({ post }) => {
                                         {/* dans setIsUpdated on lui passe linverse de isUpdatd pour pouvoir ouvrir et fermer le toggle en cliquant dessus */}
                                         <img src='./img/icons/edit.svg' alt='edit' />
                                     </div>
-
+                                    <DeleteCard id={post._id}/>
                                 </div>
                             )}
                         <div className='card-footer'>
